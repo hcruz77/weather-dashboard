@@ -11,27 +11,30 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="background-color: blue"  id="header">
-        <h4 class="text-center mb-0 text-white">Weather Dashboard</h4>
-        <nav class="navbar navbar-light" id="navbar"></nav>
-    </div>
-    <main>
-        <p>city date and current weather go here</p>
-        <form>
-            <div class="form-group">
-                <label for="search-text">Enter a City</label>
-                <input class="form-control" type="text" name="search-text" id="search">
-
-                <input class="form-control btn-light" type="submit" value="" name="submit-search"
-                    id="submit-search">Submit</input>
+    <header class="container-fluid text-light mb-5 p-3" style="background-color: blue">
+        <div class="d-flex align-items-center">
+            <h1>Weather Dashboard</h1>
+        </div>
+    </header>
+    <section class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 col-xl-4  mb-5">
+                <form>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Search for a City:</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter City">
+                    </div>
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
+                </form>
             </div>
-        </form>
-    </main>
+              <div class="col-12 col-md-8 col-xl-8">
+                <p>city date and current weather go here Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis iusto sunt sapiente officia ipsa dolores dolorem ipsum nemo dolorum. Molestiae maxime deserunt dolore illo harum ipsum, facilis quod autem dolores.</p>
+              </div>
+        </div>
+    </section>
+    <section class="container">
 
-    <sidebar>
-        <p>city search and previous search buttons go here</p>
-    </sidebar>
-
+    </section>
 
 </body>
 
