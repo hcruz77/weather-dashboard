@@ -6,35 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="./assets/js/script.js"></script>
 </head>
 
 <body>
-    <header class="container-fluid text-light mb-5 p-3" style="background-color: blue">
+    <header class="container-fluid text-light mb-5 p-3" style="background-color: rgb(7, 7, 105)">
         <div class="d-flex align-items-center">
             <h1>Weather Dashboard</h1>
         </div>
     </header>
-    <section class="container">
-        <div class="row">
-            <div class="col-12 col-md-4 col-xl-4  mb-5">
-                <form>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Search for a City:</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter City">
-                    </div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
+    <main class="container-fluid">
+        <section class="row">
+            <div class="col-12 col-md-3">
+                <form id="searchForm" class="card p-3 m-3">
+                    <input type="text" class="form-control mb-3" id="q" placeholder="Search for a City">
+                    <button type="button" id="search" class="btn btn-info btn-lg btn-block mb-3">Search</button>
+                    <div id="storedCities"></div>
                 </form>
             </div>
-              <div class="col-12 col-md-8 col-xl-8">
-                <p>city date and current weather go here Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis iusto sunt sapiente officia ipsa dolores dolorem ipsum nemo dolorum. Molestiae maxime deserunt dolore illo harum ipsum, facilis quod autem dolores.</p>
-              </div>
-        </div>
-    </section>
-    <section class="container">
+            <div class="col-12 col-md-9">
+                <div class="card p-3 m-3" id="current">
 
-    </section>
+                    <div>
+                    </div id="fiveDay" class="row">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
 
 </body>
 
