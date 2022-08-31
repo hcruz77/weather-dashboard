@@ -24,7 +24,8 @@ fetch(geoURL)
       })
       .then(function (data) {
         console.log(data);
-
+        
+//displays current data
         var currentEl = document.querySelector("#current");
 
         var h2El = document.createElement('h2');
