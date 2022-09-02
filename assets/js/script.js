@@ -4,7 +4,7 @@ var appid = '692efab00ae66e9f48137e6ea4766fcd';
 var q = "Chicago";
 //var searchForm = document.querySelector("#searchForm");
 
-//
+//pull location for weather
 var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
 
 fetch(geoURL)
@@ -16,6 +16,7 @@ fetch(geoURL)
     console.log('LAT', city.lat);
     console.log('LON', city.lon);
 
+    //pull weather for location
     var oneCall = `https://api.openweathermap.org/data/3.0/onecall?lat=${city.lat}&lon=${city.lon}&appid=${appid}&units=imperial&exclude=hourly,minutely`;
 
     fetch(oneCall)
@@ -25,7 +26,8 @@ fetch(geoURL)
       .then(function (data) {
         console.log(data);
         
-//displays current data
+//will display current data
+
         var currentEl = document.querySelector("#current");
 
         var h2El = document.createElement('h2');
@@ -43,7 +45,28 @@ fetch(geoURL)
         currentEl.appendChild(windEl);
         currentEl.appendChild(humidityEl);
         currentEl.appendChild(uviEl);
-        
+
+//will display 5-day
+
+       // var fiveDayEl = document.querySelector('#fiveDay');
+
+        var h5El = document.createElement('h5');
+        var tempEl = document.createElement('p');
+        var windEl = document.createElement('p');
+        console.log(data.daily)
+        for(var i = 0; i < 5; i++) {
+          tempEl.textContent = 'TEMP: ' + data.daily[i].day.temp;
+          windEl.textContent = 'WIND: ' + data.daily.wind_speed;
+          humidityEl.textContent = 'HUMIDITY: ' + data.daily.humidity;
+          fiveDayEl.appendChild(h5El);
+          fiveDayEl.appendChild(tempEl);
+          fiveDayEl.appendChild(windEl);
+          fiveDayEl.appendChild(humidityEl);
+          
+        }
+
+
+        //date
       });
   });
-  searchEl.addEventListener("click", handleSearch);
+  //searchEl.addEventListener("click", handleSearch);
