@@ -26,7 +26,7 @@ currentEl.appendChild(tempEl);
 currentEl.appendChild(windEl);
 currentEl.appendChild(humidityEl);
 currentEl.appendChild(uviEl);
-
+}
 
 
 
