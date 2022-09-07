@@ -103,7 +103,7 @@ var oneCall = `https://api.openweathermap.org/data/3.0/onecall?lat=${city.lat}&l
 var handleSearch = function(event) {
   event.preventDefault();
 var q = document.querySelector('#q');
-var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
+var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
 fetch(geoURL)
   .then(function (response) {
     return response.json();
@@ -117,7 +117,7 @@ fetch(geoURL)
     event.preventDefault();
     if (event.target.matches('button')) {
     var q = event.target.textContent;
-    var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
+    var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
     fetch(geoURL)
     .then(function (response) {
       return response.json();
