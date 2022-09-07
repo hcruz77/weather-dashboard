@@ -1,14 +1,16 @@
 
 
 var appid = '692efab00ae66e9f48137e6ea4766fcd';
-
-var storedCities = document.querySelector('#storedCities');
+var searchForm = document.querySelector('#searchForm');
+var cityHistory = document.querySelector('#cityHistory');
 var searchBtn = document.querySelector("#search");
 
 
 
 var showWeather = function (data, city) {
   console.log(data);
+ // currentEl.innerHTML = '';
+var fiveDayEl = document.querySelector('fiveDay');
 var currentEl = document.querySelector("#current");
 var localDate = new Date(data.current.dt * 1000).toLocaleDateString();
 var h2El = document.createElement('h2');
@@ -26,8 +28,46 @@ currentEl.appendChild(tempEl);
 currentEl.appendChild(windEl);
 currentEl.appendChild(humidityEl);
 currentEl.appendChild(uviEl);
+
+console.log('DAILY', data.daily.slice(1,6));
+var fiveDay = data.daily.slice(1,6);
+
+//fiveDayEl.innerHTML = '';
+for (var day of fiveDay) {
+
+  console.log('DAY', day);
+
+  var date = new Date(data.current.dt * 1000).toLocaleDateString();
+  var temp = day.temp.day;
+  var colEl = document.createElement('div');
+  var cardEl = document.createElement('div');
+  var dateEl = document.createElement('p');
+  dateEl.textContent = date;
+  var tempEl = document.createElement('p');
+  tempEl.textContent = temp;
+  colEl.className = "col-12 col-md";
+  cardEl.className = "card p=3 m-3";
+
+  fiveDayEl.appendChild(colEl);
+  colEl.appendChild(cardEl);
+  cardEl.appendChild(dateEl);
+  cardEl.appencChild(tempEl);
+}
 }
 
+
+
+var historyBtn = function() {
+var cities = JSON.parse(localStorage.getItem('cities')) || []; 
+cityHistory.innerHTML = '';
+for (var city of cities){
+  var buttonEl = document.createElement('button');
+  buttonEl.textContent = city;
+  buttonEl.className = "btn btn-secondary";
+  cityHistory.appendChild(buttonEl);
+}
+
+};
 
 
 var getOneCall = function(city) {
@@ -47,6 +87,7 @@ var oneCall = `https://api.openweathermap.org/data/3.0/onecall?lat=${city.lat}&l
       cities.push(city);
       var data = JSON.stringify(cities);
       localStorage.setItem('cities', data)
+      historyBtn();
     }
 
     var getGeo = function(locations) {
@@ -67,12 +108,29 @@ fetch(geoURL)
   .then(function (response) {
     return response.json();
   })
+  .then(function (data) {
+    getGeo(data);
+  })
  
-    getGeo(locations)
-    
+  }
+  var handleCityClick = function(event){
+    event.preventDefault();
+    if (event.target.matches('button')) {
+    var q = event.target.textContent;
+    var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
+    fetch(geoURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      getGeo(data);
+    })
+  }
   }
   
   searchBtn.addEventListener('click', handleSearch);
+  cityHistory.addEventListener('click', handleCityClick);
+  historyBtn();
  
 
    
@@ -83,22 +141,7 @@ fetch(geoURL)
        
         
 
-      //   var fiveForecast = function(data){
-      //    for(var i = 0; i < 5; i++) {
-      //  console.log(data.daily[i])
-      //  forecastDate[i].textContent = new Date(data.daily[i].dt * 1000).toLocaleDateString()
-      //  var h5El = document.createElement('h5');
-      //  temp[i].innerHTML = 'TEMP:'
-      //  tempEl.textContent = 'TEMP: ' + data.daily[i].temp.day;
-      //  windEl.textContent = 'WIND: ' + data.daily[i].wind_speed;
-      //  humidityEl.textContent = 'HUMIDITY: ' + data.daily[i].humidity;
-      //  cardEl.appendChild(h5El);
-      //  cardEl.appendChild(tempEl);
-      //  cardEl.appendChild(windEl);
-      //  cardEl.appendChild(humidityEl);
-
-  
- 
+   
 
   
 
@@ -109,25 +152,7 @@ fetch(geoURL)
  
 
 
-  //var fiveDayEl = document.querySelector('#fiveDay');
-
- //var h5El = document.createElement('h5');
- //var tempEl = document.createElement('p');
- //var windEl = document.createElement('p');
- 
- //var fiveForecast = function(data){
- //for(var i = 0; i < 5; i++) {
- // console.log(data.daily[i])
- // forecastDate[i].textContent = new Date(data.daily[i].dt * 1000).toLocaleDateString()
- // temp[i].innerHTML = 'TEMP:'
-  //tempEl.textContent = 'TEMP: ' + data.daily[i].temp.day;
-  //windEl.textContent = 'WIND: ' + data.daily.wind_speed;
-  //humidityEl.textContent = 'HUMIDITY: ' + data.daily.humidity;
-  //fiveDayEl.appendChild(h5El);
-  //fiveDayEl.appendChild(tempEl);
-  //fiveDayEl.appendChild(windEl);
-  //fiveDayEl.appendChild(humidityEl);
- 
+  
 
  
 
