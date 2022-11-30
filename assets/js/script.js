@@ -7,17 +7,17 @@ var searchBtn = document.querySelector("#search");
 
  
 var fiveDayEl = document.querySelector('#fiveDay');
+var currentEl = document.querySelector("#current");
 
 var showWeather = function (data, city) {
   console.log(data);
-var currentEl = document.querySelector("#current");
 var localDate = new Date(data.current.dt * 1000).toLocaleDateString();
 var h2El = document.createElement('h2');
 var tempEl = document.createElement('p');
 var windEl = document.createElement('p');
 var humidityEl = document.createElement('p');
-var uviEl = document.createElement('p');
 var icon = data.current.weather[0].icon;
+var uviEl = document.createElement('p');
 var imgEl = document.createElement('img');
 h2El.textContent = city.name + ' ' + localDate;
 tempEl.textContent = 'TEMP: ' + data.current.temp + " °F";
