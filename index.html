@@ -2,81 +2,64 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <title>Weather Dashboard</title>
-   
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <title>Weather Dashboard</title>
+  <style>
+    body {
+      background-image: url(./assets/images/moonDesign.png);
+      background-size: cover;
+      min-height: 100;
+    }
+    header {
+      background-image: url(./assets/images/headerDesign.png);
+      background-size: cover;
+      min-height: 100;
+    }
+
+
+    #searchForm, #current {
+      background-color: rgba(245, 245, 245, 0.4);
+    }
+
+  </style>
+
 </head>
 
+
 <body>
-    <header class="container-fluid text-light mb-5 p-3" style="background-color: rgb(7, 7, 105)">
-        <div class="d-flex align-items-center">
-            <h1>Weather Dashboard</h1>
+  <header class="container-fluid text-light mb-5 p-3" style="background-color: rgb(7, 7, 105)">
+    <div class="d-flex align-items-center">
+      <h1>Weather Dashboard</h1>
+    </div>
+  </header>
+  <main class="container-fluid ">
+    <section class="row">
+ 
+      <div class="col-12 col-md-3">
+        <form id="searchForm" class="card p-3 m-3 border border-dark">
+          <input type="text" class="form-control mb-3" id="q" placeholder="Search for a City">
+          <button type="button" id="search" class="btn btn-info btn-lg btn-block mb-3">Search</button>
+          <div id="cityHistory"></div>
+        </form>
+      </div>
+      <div class="col-12 col-md-9">
+        <div class="card p-3 m-3 border border-dark" id="current">
         </div>
-    </header>
-    <main class="container-fluid">
-        <section class="row">
-            <div class="col-12 col-md-3">
-                <form id="searchForm" class="card p-3 m-3">
-                    <input type="text" class="form-control mb-3" id="q" placeholder="Search for a City">
-                    <button type="button" id="search" class="btn btn-info btn-lg btn-block mb-3">Search</button>
-                    <div id="cityHistory"></div>
-                </form>
-            </div>
-            <div class="col-12 col-md-9">
-                <div class="card p-3 m-3" id="current">
-                    <!-- <h2 class="city-name"></h2> -->
-                    <!-- <ul class="weather-info"> -->
-                    <!-- <li class="temp">TEMP:</li> -->
-                    <!-- <li class="wind">WIND:</li> -->
-                    <!-- <li class="humidity">HUMIDITY:</li> -->
-                    <!-- <li class="uvi">UV INDEX:</li> -->
-                    <!-- </ul> -->
 
-                </div>
-                <div class="forecast"></div>
-                <h4>5-Day Forecast:</h4>
-                <div id="fiveDay" class="row">
-                    <div class="col-12 col-md"></div>
-                    <div class="card p-3 m-3">
-                        <h5>date</h5>
-                        <p>weather</p>
+        <h4 class="col-12 col-md">5-Day Forecast:</h4>
+        <div id="fiveDay" class="row">
+        </div>
+      </div>
+      </div>
 
-                    </div>
-                    <div class="col-12 col-md"></div>
-                    <div class="card p-3 m-3">
-                        <h5>date</h5>
-                        <p>weather</p>
+    </section>
 
-                    </div>
-                    <div class="col-12 col-md"></div>
-                    <div class="card p-3 m-3">
-                        <h5>date</h5>
-                        <p>weather</p>
+  </main>
 
-                    </div>
-                    <div class="col-12 col-md"></div>
-                    <div class="card p-3 m-3">
-                        <h5>date</h5>
-                        <p>weather</p>
-
-                    </div>
-                    <div class="col-12 col-md"></div>
-                    <div class="card p-3 m-3">
-                        <h5>date</h5>
-                        <p>weather</p>
-
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-    </main>
-
-    <script type="text/javascript" src="./assets/js/script.js"></script>
+  <script type="text/javascript" src="./assets/js/script.js"></script>
 </body>
 
 </html>

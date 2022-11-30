@@ -5,12 +5,11 @@ var searchForm = document.querySelector('#searchForm');
 var cityHistory = document.querySelector('#cityHistory');
 var searchBtn = document.querySelector("#search");
 
-
+ 
+var fiveDayEl = document.querySelector('#fiveDay');
 
 var showWeather = function (data, city) {
   console.log(data);
- // currentEl.innerHTML = '';
-var fiveDayEl = document.querySelector('fiveDay');
 var currentEl = document.querySelector("#current");
 var localDate = new Date(data.current.dt * 1000).toLocaleDateString();
 var h2El = document.createElement('h2');
@@ -18,42 +17,65 @@ var tempEl = document.createElement('p');
 var windEl = document.createElement('p');
 var humidityEl = document.createElement('p');
 var uviEl = document.createElement('p');
+var icon = data.current.weather[0].icon;
+var imgEl = document.createElement('img');
 h2El.textContent = city.name + ' ' + localDate;
-tempEl.textContent = 'TEMP: ' + data.current.temp;
+tempEl.textContent = 'TEMP: ' + data.current.temp + " °F";
 windEl.textContent = 'WIND: ' + data.current.wind_speed;
-humidityEl.textContent = 'HUMIDITY: ' + data.current.humidity;
-uviEl.textContent = 'UV INDEX: ' + data.current.uvi
+humidityEl.textContent = 'HUMIDITY: ' + data.current.humidity + ' %';
+uviEl.textContent = 'UV INDEX: ' + data.current.uvi;
+
+imgEl.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+imgEl.width = 80;
+imgEl.height = 80;
+imgEl.alt = icon;
+
 currentEl.appendChild(h2El);
+currentEl.appendChild(imgEl)
 currentEl.appendChild(tempEl);
 currentEl.appendChild(windEl);
 currentEl.appendChild(humidityEl);
 currentEl.appendChild(uviEl);
 
-console.log('DAILY', data.daily.slice(1,6));
+
 var fiveDay = data.daily.slice(1,6);
-
-//fiveDayEl.innerHTML = '';
+console.log(fiveDay);
+fiveDayEl.innerHTML = null;
 for (var day of fiveDay) {
-
-  console.log('DAY', day);
-
-  var date = new Date(data.current.dt * 1000).toLocaleDateString();
-  var temp = day.temp.day;
+  var icon = day.weather[0].icon;
+  var date = new Date(day.dt * 1000).toLocaleDateString();
   var colEl = document.createElement('div');
   var cardEl = document.createElement('div');
-  var dateEl = document.createElement('p');
-  dateEl.textContent = date;
-  var tempEl = document.createElement('p');
-  tempEl.textContent = temp;
-  colEl.className = "col-12 col-md";
-  cardEl.className = "card p=3 m-3";
+  var h5El = document.createElement('h5');
+  var temp = document.createElement('p');
+  var img = document.createElement('img');
+  var wind = document.createElement('p');
+  var humidity = document.createElement('p');
+  colEl.className = "card col-12 col-md p-3 m-3 border border-dark bg-secondary text-white;";
+  colEl.style.width = '20rem';
+  cardEl.className = "card-body";
+  h5El.className = 'card-title';
+  temp.className = 'card-text';
+
+  h5El.textContent = date;
+  temp.textContent = "Temp: " + day.temp.day + " °F";
+  wind.textContent = "Wind: " + day.wind_speed + " mph";
+  humidity.textContent = "Humidity: " + day.humidity + " %";
+
+  img.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  img.width = 40;
+  img.height = 40;
+  img.alt = icon;
 
   fiveDayEl.appendChild(colEl);
-  colEl.appendChild(cardEl);
-  cardEl.appendChild(dateEl);
-  cardEl.appencChild(tempEl);
+ colEl.appendChild(cardEl);
+  cardEl.appendChild(h5El);
+  cardEl.appendChild(img);
+  cardEl.appendChild(temp);
+  cardEl.appendChild(wind);
+  cardEl.appendChild(humidity);
 }
-}
+};
 
 
 
@@ -63,7 +85,7 @@ cityHistory.innerHTML = '';
 for (var city of cities){
   var buttonEl = document.createElement('button');
   buttonEl.textContent = city;
-  buttonEl.className = "btn btn-secondary";
+  buttonEl.className = "btn btn-secondary btn-block";
   cityHistory.appendChild(buttonEl);
 }
 
